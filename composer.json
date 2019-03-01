@@ -18,11 +18,13 @@
     },
     "require": {
         "php": ">=7.0",
-        "ext-bcmath": "*",
-        "phpseclib/phpseclib": "^2.0"
+        "phpseclib/phpseclib": "dev-master"
     },
     "require-dev": {
         "artisansdk/bench": "dev-master"
+    },
+    "suggest": {
+        "ext-gmp": "Install the GMP (GNU Multiple Precision) extension in order to speed up arbitrary precision integer arithmetic operations."
     },
     "autoload": {
         "psr-4": {

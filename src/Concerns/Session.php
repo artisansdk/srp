@@ -67,7 +67,7 @@ trait Session
      */
     public function number(): BigInteger
     {
-        $bits = max([256, $this->precision($this->config->prime())]);
+        $bits = max([256, $this->config->prime()->getPrecision()]);
 
         $one = new BigInteger(1);
         $number = $zero = new BigInteger(0);

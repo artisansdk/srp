@@ -51,22 +51,6 @@ trait Hashing
     }
 
     /**
-     * Get the precision of a big integer.
-     *
-     * @param \phpseclib\Math\BigInteger $number
-     *
-     * @return int
-     */
-    protected function precision(BigInteger $number): int
-    {
-        $bits = $number->toBytes();
-        $ordinal = ord($bits[0]);
-        for ($offset = 0; $ordinal >> $offset; ++$offset);
-
-        return (strlen($bits) - 1) * 8 + $offset;
-    }
-
-    /**
      * Generate random bytes as hexadecimal string.
      *
      * @param int $bytes

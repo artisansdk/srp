@@ -1,5 +1,6 @@
 <?php
 
+// RFC 5054 2048 bit Constant Config
 // @link https://tools.ietf.org/html/rfc5054#appendix-A)
 return [
 
