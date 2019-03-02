@@ -12,6 +12,7 @@ use phpseclib\Math\BigInteger;
  * Client-Side SRP-6a Implementation.
  *
  * @example $srp = Client::configure($N = '21766174458...', $g = '2', $k = '5b9e8ef0...');
+ *            $s = $srp->salt($I = 'user123', $s = 'a18f921d1546...');
  *     $verifier = $srp->enroll($I = 'user123', $p = 'password');
  *            $A = $srp->challenge($I = 'user123', $p = 'password');
  *           $M2 = $srp->response($B = '48147d013e3a2...', $s = '21d1546a18f9...');
