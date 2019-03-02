@@ -52,10 +52,16 @@ trait Session
     /**
      * Generate a new random salt.
      *
+     * @param string $identity
+     * @param string $salt
+     *
      * @return string
      */
-    public function salt(): string
+    public function salt(string $identity, string $salt): string
     {
+        $this->identity = $identity;
+        $this->salt = $salt;
+
         return $this->hash(time().':'.$this->number());
     }
 

@@ -63,7 +63,7 @@ class Server implements Contract
      *
      * @return string
      */
-    public function challenge(string $identity, string $verifier, string $salt = null): string
+    public function challenge(string $identity, string $verifier, string $salt): string
     {
         $this->assertIsStep(0);
 

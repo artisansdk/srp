@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ArtisanSdk\SRP;
 
-use Artisansdk\SRP\Contracts\Config as Contract;
+use ArtisanSdk\SRP\Contracts\Config as Contract;
 use phpseclib\Math\BigInteger;
 
 class Config implements Contract
@@ -103,6 +103,20 @@ class Config implements Contract
     public function jsonSerialize(): array
     {
         return $this->toArray();
+    }
+
+    /**
+     * Create a new config from an array.
+     *
+     * @param array $config
+     *
+     * @return \ArtisanSdk\SRP\Contracts\Config
+     */
+    public static function fromArray(array $config): Contract
+    {
+        $config = (object) $config;
+
+        return new static($config->prime, $config->generator, $config->key, $config->algorithm);
     }
 
     /**

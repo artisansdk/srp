@@ -28,7 +28,7 @@ interface Client extends Service
      *
      * @return string
      */
-    public function challenge(string $identity, string $password, string $salt = null): string;
+    public function challenge(string $identity, string $password, string $salt): string;
 
     /**
      * Step 2: Create response to server's public key challenge B with a proof of password M1.

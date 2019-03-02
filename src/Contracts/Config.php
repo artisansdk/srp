@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ArtisanSdk\SRP\Contracts;
 
+use JsonSerializable;
 use phpseclib\Math\BigInteger;
 
 interface Config extends JsonSerializable
@@ -35,6 +36,15 @@ interface Config extends JsonSerializable
      * @return string
      */
     public function algorithm(): string;
+
+    /**
+     * Create a new config from an array.
+     *
+     * @param array $config
+     *
+     * @return \ArtisanSdk\SRP\Contracts\Config
+     */
+    public static function fromArray(array $config): Config;
 
     /**
      * Cast to an array.

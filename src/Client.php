@@ -62,7 +62,10 @@ class Client implements Contract
      */
     public function enroll(string $identity, string $password, string $salt): string
     {
-        $signature = $this->signature($identity, $password, $salt);
+        $this->identity = $identity;
+        $this->salt = $salt;
+
+        $signature = $this->signature($identity, $password, $this->salt);
 
         return $this->config->generator()->powMod($signature, $this->config->prime())->toHex();
     }
@@ -76,7 +79,7 @@ class Client implements Contract
      *
      * @return string
      */
-    public function challenge(string $identity, string $password, string $salt = null): string
+    public function challenge(string $identity, string $password, string $salt): string
     {
         $this->identity = $identity;
         $this->password = $password;

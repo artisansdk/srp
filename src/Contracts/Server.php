@@ -17,7 +17,7 @@ interface Server extends Service
      *
      * @return string
      */
-    public function challenge(string $identity, string $verifier, string $salt = null): string;
+    public function challenge(string $identity, string $verifier, string $salt): string;
 
     /**
      * Step 2: Verifies the password proof M1 based on the client's one-time public
