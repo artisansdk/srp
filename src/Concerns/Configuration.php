@@ -1,6 +1,6 @@
 <?php
 
-namespace ArtisanSdk\SRP\Concerns\Configuration;
+namespace ArtisanSdk\SRP\Concerns;
 
 use ArtisanSdk\SRP\Config;
 use ArtisanSdk\SRP\Contracts\Config as Contract;
