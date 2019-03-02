@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace ArtisanSdk\SRP\Contracts;
 
+use phpseclib\Math\BigInteger;
+
 interface Config extends JsonSerializable
 {
     /**

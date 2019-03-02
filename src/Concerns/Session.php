@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace ArtisanSdk\SRP\Concerns;
 
+use phpseclib\Math\BigInteger;
+
 trait Session
 {
     /**
