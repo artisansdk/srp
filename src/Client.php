@@ -14,8 +14,8 @@ use phpseclib\Math\BigInteger;
  * @example $srp = Client::configure($N = '21766174458...', $g = '2', $k = '5b9e8ef0...');
  *            $s = $srp->salt($I = 'user123', $s = 'a18f921d1546...');
  *     $verifier = $srp->enroll($I = 'user123', $p = 'password');
- *            $A = $srp->challenge($I = 'user123', $p = 'password');
- *           $M2 = $srp->response($B = '48147d013e3a2...', $s = '21d1546a18f9...');
+ *            $A = $srp->identify($I = 'user123', $p = 'password');
+ *           $M2 = $srp->challenge($B = '48147d013e3a2...', $s = '21d1546a18f9...');
  *       $result = $srp->confirm($M2 = '937ee2752d2d0a18eea2e7');
  */
 class Client implements Contract
@@ -72,7 +72,7 @@ class Client implements Contract
     }
 
     /**
-     * Step 1: Generates a one-time client challenge A encoded as a hexadecimal.
+     * Step 1: Generates a one-time client key A encoded as a hexadecimal.
      *
      * @param string $identity I of user
      * @param string $password P for user
@@ -80,7 +80,7 @@ class Client implements Contract
      *
      * @return string
      */
-    public function challenge(string $identity, string $password, string $salt): string
+    public function identify(string $identity, string $password, string $salt): string
     {
         $this->identity = $identity;
         $this->password = $password;
@@ -97,7 +97,7 @@ class Client implements Contract
     }
 
     /**
-     * Step 2: Create response to server's public key challenge B with a proof of password M1.
+     * Step 2: Create challenge response to server's public key challenge B with a proof of password M1.
      *
      * @param string $server hexadecimal key B from server
      * @param string $salt   value s for user's public value A
@@ -106,7 +106,7 @@ class Client implements Contract
      *
      * @return string
      */
-    public function response(string $server, string $salt): string
+    public function challenge(string $server, string $salt): string
     {
         // Verify valid public key
         $one = new BigInteger(1);
@@ -119,8 +119,8 @@ class Client implements Contract
         // Create proof M1 of password using A and previously stored verifier v
         $union = new BigInteger($this->hash($this->public->toHex().$server->toHex()), 16);
         $signature = $this->signature($this->identity, $this->password, $salt);
-        $key = $union->multiply($signature)->add($this->private);
-        $shared = $this->unpad($server->subtract($this->config->generator()->modPow($signature, $this->config->prime())->multiply($this->key))->modPow($key, $this->config->prime())->toHex());
+        $exponent = $union->multiply($signature)->add($this->private);
+        $shared = $this->unpad($server->subtract($this->config->generator()->modPow($signature, $this->config->prime())->multiply($this->config->key()))->modPow($exponent, $this->config->prime())->toHex());
 
         // Compute verification M = H(A | B | S)
         $message = $this->unpad($this->hash($this->public->toHex().$server->toHex().$shared));
@@ -137,8 +137,8 @@ class Client implements Contract
         // Save shared session key K and
         $this->session = $this->hash($shared);
 
-        // Respond with client public key A and message M1
-        return [$this->public->toHex(), $message];
+        // Respond with message M1
+        return $message;
     }
 
     /**
@@ -178,6 +178,8 @@ class Client implements Contract
      * Assert that none of the params were emtpy strings when trimmed.
      *
      * @param string[] $params
+     *
+     * @throws \InvalidArgumentException for an empty parameter
      */
     protected function assertNotEmpty(array $params): void
     {

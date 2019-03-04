@@ -20,7 +20,7 @@ interface Client extends Service
     public function enroll(string $identity, string $password, string $salt): string;
 
     /**
-     * Step 1: Generates a one-time client challenge A encoded as a hexadecimal.
+     * Step 1: Generates a one-time client key A encoded as a hexadecimal.
      *
      * @param string $identity I of user
      * @param string $password P for user
@@ -28,10 +28,10 @@ interface Client extends Service
      *
      * @return string
      */
-    public function challenge(string $identity, string $password, string $salt): string;
+    public function identify(string $identity, string $password, string $salt): string;
 
     /**
-     * Step 2: Create response to server's public key challenge B with a proof of password M1.
+     * Step 2: Create challenge response to server's public key challenge B with a proof of password M1.
      *
      * @param string $server hexadecimal key B from server
      * @param string $salt   value s for user's public value A
@@ -40,7 +40,7 @@ interface Client extends Service
      *
      * @return string
      */
-    public function response(string $server, string $salt): string;
+    public function challenge(string $server, string $salt): string;
 
     /**
      * Step 3: Confirm server's proof of shared key message M2 against

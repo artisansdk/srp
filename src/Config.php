@@ -12,21 +12,21 @@ class Config implements Contract
     /**
      * The large safe prime N for computing g^x mod N.
      *
-     * @var \Brick\Math\BigInteger
+     * @var \phpseclib\Math\BigInteger
      */
     protected $prime;
 
     /**
      * The configured generator g of the multiplicative group.
      *
-     * @var \Brick\Math\BigInteger
+     * @var \phpseclib\Math\BigInteger
      */
     protected $generator;
 
     /**
      * The derived key k = H(N, g).
      *
-     * @var \Brick\Math\BigInteger
+     * @var \phpseclib\Math\BigInteger
      */
     protected $key;
 

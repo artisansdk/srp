@@ -34,21 +34,21 @@ class Server implements Contract
     /**
      * The user's secret password verifier v.
      *
-     * @var \Brick\Math\BigInteger
+     * @var \phpseclib\Math\BigInteger
      */
     protected $verifier;
 
     /**
      * Server's secret random number b.
      *
-     * @var \Brick\Math\BigInteger
+     * @var \phpseclib\Math\BigInteger
      */
     protected $private;
 
     /**
      * Server's one-time challenge B as derived from b.
      *
-     * @var \Brick\Math\BigInteger
+     * @var \phpseclib\Math\BigInteger
      */
     protected $public;
 
@@ -113,8 +113,8 @@ class Server implements Contract
 
         // Verify proof M1 of password using A and previously stored verifier v
         $union = new BigInteger($this->hash($client->toHex().$this->public->toHex()), 16);
-        $key = $this->verifier->powMod($union, $this->config->prime());
-        $shared = $this->unpad($client->multiply($key)->modPow($this->private->toHex(), $this->config->prime())->toHex());
+        $multiplier = $this->verifier->powMod($union, $this->config->prime());
+        $shared = $this->unpad($client->multiply($multiplier)->modPow($this->private, $this->config->prime())->toHex());
 
         // Compute verification M = H(A | B | S)
         $message = $this->unpad($this->hash($client->toHex().$this->public->toHex().$shared));
