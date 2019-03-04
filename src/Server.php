@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace ArtisanSdk\SRP;
 
 use ArtisanSdk\SRP\Contracts\Server as Contract;
-use Exception;
-use InvalidArgumentException;
+use ArtisanSdk\SRP\Exceptions\InvalidKey;
+use ArtisanSdk\SRP\Exceptions\PasswordMismatch;
+use ArtisanSdk\SRP\Exceptions\StepReplay;
 use phpseclib\Math\BigInteger;
 
 /**
@@ -108,7 +109,7 @@ class Server implements Contract
         $zero = new BigInteger(0);
         $client = new BigInteger($this->unpad($client), 16);
         if ($client->powMod($one, $this->config->prime())->equals($zero)) {
-            throw new InvalidArgumentException('Client public key failed A mod N == 0 check.');
+            throw new InvalidKey('Client public key failed A mod N == 0 check.');
         }
 
         // Verify proof M1 of password using A and previously stored verifier v
@@ -119,7 +120,7 @@ class Server implements Contract
         // Compute verification M = H(A | B | S)
         $message = $this->unpad($this->hash($client->toHex().$this->public->toHex().$shared));
         if ($proof !== $message) {
-            throw new InvalidArgumentException('Proof of password does not match password verifier.');
+            throw new PasswordMismatch('Proof of password does not match password verifier.');
         }
 
         // Clear stored state for v, s, b, and B
@@ -140,12 +141,14 @@ class Server implements Contract
     /**
      * Assert that the current step matches the expected step.
      *
-     * @var int
+     * @param int
+     *
+     * @throws \ArtisanSdk\SRP\Exceptions\StepReplay if replay occurs
      */
     protected function assertIsStep(int $expected): void
     {
         if ($this->step !== $expected) {
-            throw new Exception('Possible dictionary attack. Aborting protocol.');
+            throw new StepReplay('Possible dictionary attack. Aborting protocol.');
         }
     }
 }

@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace ArtisanSdk\SRP;
 
 use ArtisanSdk\SRP\Contracts\Client as Contract;
-use InvalidArgumentException;
+use ArtisanSdk\SRP\Exceptions\EmptyParameter;
+use ArtisanSdk\SRP\Exceptions\InvalidKey;
 use phpseclib\Math\BigInteger;
 
 /**
@@ -102,7 +103,7 @@ class Client implements Contract
      * @param string $server hexadecimal key B from server
      * @param string $salt   value s for user's public value A
      *
-     * @throws \InvalidArgumentException for invalid public key B
+     * @throws \ArtisanSdk\SRP\Exceptions\InvalidKey for invalid public key B
      *
      * @return string
      */
@@ -113,7 +114,7 @@ class Client implements Contract
         $zero = new BigInteger(0);
         $server = new BigInteger($this->unpad($server), 16);
         if ($server->powMod($one, $this->config->prime())->equals($zero)) {
-            throw new InvalidArgumentException('Server public key failed B mod N == 0 check.');
+            throw new InvalidKey('Server public key failed B mod N == 0 check.');
         }
 
         // Create proof M1 of password using A and previously stored verifier v
@@ -179,13 +180,13 @@ class Client implements Contract
      *
      * @param string[] $params
      *
-     * @throws \InvalidArgumentException for an empty parameter
+     * @throws \ArtisanSdk\SRP\Exceptions\EmptyParameter for an empty parameter
      */
     protected function assertNotEmpty(array $params): void
     {
         foreach ($params as $param) {
             if ('' === trim($param)) {
-                throw new InvalidArgumentException('An empty string was passed as parameter to signature.');
+                throw new EmptyParameter('An empty string was passed as parameter to signature.');
             }
         }
     }
