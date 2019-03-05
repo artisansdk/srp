@@ -2,6 +2,8 @@
 
 A client and server-side implementation in PHP of the Secure Remote Password (SRP-6a) protocol.
 
+**Want to see a demo in Laravel?** Check out [dalabarge/srp-demo](https://github.com/dalabarge/srp-demo)
+
 ## Table of Contents
 
 - [Installation](#installation)
@@ -42,3 +44,8 @@ Copyright (c) 2019 [Artisans Collaborative](https://artisanscollaborative.com)
 
 This package is released under the MIT license. Please see the LICENSE file
 distributed with every copy of the code for commercial licensing terms.
+
+Special thanks goes to [simon_massey/thinbus-php-srp](https://bitbucket.org/simon_massey/thinbus-php/src/)
+for initial inspiration for both the PHP and JavaScript libraries. This demo
+would not be possible without his explanation of the mechanics of Secure Remote
+Password protocol.
