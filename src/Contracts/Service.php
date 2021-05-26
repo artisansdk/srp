@@ -40,9 +40,9 @@ interface Service
     /**
      * Get the user's identity I.
      *
-     * @return string
+     * @return null|string
      */
-    public function identity(): string;
+    public function identity(): ?string;
 
     /**
      * Get shared session key K = H(S).

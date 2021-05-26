@@ -32,11 +32,13 @@ trait Session
     /**
      * Get the user's identity I.
      *
-     * @return string
+     * @return null|string
      */
-    public function identity(): string
+    public function identity(): ?string
     {
-        return $this->identity;
+        return empty($this->identity)
+            ? null
+            : $this->identity;
     }
 
     /**
