@@ -7,7 +7,7 @@
     "authors": [
         {
             "name": "Daniel LaBarge",
-            "email": "daniel@artisanscollaborative.com"
+            "email": "daniel@artisanmade.io"
         }
     ],
     "config": {
@@ -17,8 +17,8 @@
         "sort-packages": true
     },
     "require": {
-        "php": ">=7.0",
-        "phpseclib/phpseclib": "dev-master"
+        "php": ">=8.0",
+        "phpseclib/phpseclib": "~3.0"
     },
     "require-dev": {
         "artisansdk/bench": "dev-master"

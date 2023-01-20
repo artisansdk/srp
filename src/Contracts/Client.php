@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ArtisanSdk\SRP\Contracts;
 
-use phpseclib\Math\BigInteger;
+use phpseclib3\Math\BigInteger;
 
 interface Client extends Service
 {
@@ -59,7 +59,7 @@ interface Client extends Service
      * @param string $password P for user
      * @param string $salt     value s chosen at random
      *
-     * @return \phpseclib\Math\BigInteger
+     * @return \phpseclib3\Math\BigInteger
      */
     public function signature(string $identity, string $password, string $salt): BigInteger;
 }

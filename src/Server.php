@@ -8,7 +8,7 @@ use ArtisanSdk\SRP\Contracts\Server as Contract;
 use ArtisanSdk\SRP\Exceptions\InvalidKey;
 use ArtisanSdk\SRP\Exceptions\PasswordMismatch;
 use ArtisanSdk\SRP\Exceptions\StepReplay;
-use phpseclib\Math\BigInteger;
+use phpseclib3\Math\BigInteger;
 
 /**
  * Server-Side SRP-6a Implementation.
@@ -35,21 +35,21 @@ class Server implements Contract
     /**
      * The user's secret password verifier v.
      *
-     * @var \phpseclib\Math\BigInteger
+     * @var \phpseclib3\Math\BigInteger
      */
     protected $verifier;
 
     /**
      * Server's secret random number b.
      *
-     * @var \phpseclib\Math\BigInteger
+     * @var \phpseclib3\Math\BigInteger
      */
     protected $private;
 
     /**
      * Server's one-time challenge B as derived from b.
      *
-     * @var \phpseclib\Math\BigInteger
+     * @var \phpseclib3\Math\BigInteger
      */
     protected $public;
 

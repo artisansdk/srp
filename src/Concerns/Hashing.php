@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ArtisanSdk\SRP\Concerns;
 
-use phpseclib\Math\BigInteger;
+use phpseclib3\Math\BigInteger;
 
 trait Hashing
 {
@@ -33,7 +33,7 @@ trait Hashing
      * @param string $identity
      * @param string $salt
      *
-     * @return \phpseclib\Math\BigInteger
+     * @return \phpseclib3\Math\BigInteger
      */
     public function nonce(string $identity, string $salt): BigInteger
     {
@@ -57,7 +57,7 @@ trait Hashing
      *
      * @param int $bytes
      *
-     * @return \phpseclib\Math\BigInteger
+     * @return \phpseclib3\Math\BigInteger
      */
     protected function bytes(int $bytes = 32): BigInteger
     {

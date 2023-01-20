@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ArtisanSdk\SRP\Concerns;
 
-use phpseclib\Math\BigInteger;
+use phpseclib3\Math\BigInteger;
 
 trait Session
 {
@@ -73,7 +73,7 @@ trait Session
      *
      * A nonce based on H(I|:|s|:|t) is added to ensure random number generation.
      *
-     * @return \phpseclib\Math\BigInteger
+     * @return \phpseclib3\Math\BigInteger
      */
     public function number(): BigInteger
     {

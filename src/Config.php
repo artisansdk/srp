@@ -5,28 +5,28 @@ declare(strict_types=1);
 namespace ArtisanSdk\SRP;
 
 use ArtisanSdk\SRP\Contracts\Config as Contract;
-use phpseclib\Math\BigInteger;
+use phpseclib3\Math\BigInteger;
 
 class Config implements Contract
 {
     /**
      * The large safe prime N for computing g^x mod N.
      *
-     * @var \phpseclib\Math\BigInteger
+     * @var \phpseclib3\Math\BigInteger
      */
     protected $prime;
 
     /**
      * The configured generator g of the multiplicative group.
      *
-     * @var \phpseclib\Math\BigInteger
+     * @var \phpseclib3\Math\BigInteger
      */
     protected $generator;
 
     /**
      * The derived key k = H(N, g).
      *
-     * @var \phpseclib\Math\BigInteger
+     * @var \phpseclib3\Math\BigInteger
      */
     protected $key;
 
@@ -58,7 +58,7 @@ class Config implements Contract
     /**
      * Get the large safe prime N for computing g^x mod N.
      *
-     * @return \phpseclib\Math\BigInteger
+     * @return \phpseclib3\Math\BigInteger
      */
     public function prime(): BigInteger
     {
@@ -68,7 +68,7 @@ class Config implements Contract
     /**
      * Get the configured generator g of the multiplicative group.
      *
-     * @return \phpseclib\Math\BigInteger
+     * @return \phpseclib3\Math\BigInteger
      */
     public function generator(): BigInteger
     {
@@ -78,7 +78,7 @@ class Config implements Contract
     /**
      * Get the derived key k = H(N, g).
      *
-     * @return \phpseclib\Math\BigInteger
+     * @return \phpseclib3\Math\BigInteger
      */
     public function key(): BigInteger
     {

@@ -6,6 +6,8 @@ A client and server-side implementation in PHP of the Secure Remote Password (SR
 
 ## Table of Contents
 
+- [Secure Remote Protocol](#secure-remote-protocol)
+  - [Table of Contents](#table-of-contents)
 - [Installation](#installation)
 - [Usage Guide](#usage-guide)
 - [Running the Tests](#running-the-tests)
@@ -40,7 +42,7 @@ See the `composer.json` for more details on their execution and reporting output
 
 # Licensing
 
-Copyright (c) 2019-2021 [Artisans Collaborative](https://artisanscollaborative.com)
+Copyright (c) 2019-2023 [Artisan Made, Co.](https://artisanmade.io)
 
 This package is released under the MIT license. Please see the LICENSE file
 distributed with every copy of the code for commercial licensing terms.

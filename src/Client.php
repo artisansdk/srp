@@ -7,7 +7,7 @@ namespace ArtisanSdk\SRP;
 use ArtisanSdk\SRP\Contracts\Client as Contract;
 use ArtisanSdk\SRP\Exceptions\EmptyParameter;
 use ArtisanSdk\SRP\Exceptions\InvalidKey;
-use phpseclib\Math\BigInteger;
+use phpseclib3\Math\BigInteger;
 
 /**
  * Client-Side SRP-6a Implementation.
@@ -42,14 +42,14 @@ class Client implements Contract
     /**
      * Client's secret random number a.
      *
-     * @var \phpseclib\Math\BigInteger
+     * @var \phpseclib3\Math\BigInteger
      */
     protected $private;
 
     /**
      * Client's one-time challenge A as derived from a.
      *
-     * @var \phpseclib\Math\BigInteger
+     * @var \phpseclib3\Math\BigInteger
      */
     protected $public;
 
@@ -163,7 +163,7 @@ class Client implements Contract
      * @param string $password P for user
      * @param string $salt     value s chosen at random
      *
-     * @return \phpseclib\Math\BigInteger
+     * @return \phpseclib3\Math\BigInteger
      */
     public function signature(string $identity, string $password, string $salt): BigInteger
     {
